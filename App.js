@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import LanguageItem from './components/LanguageItem';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const langs = [
+    { id: '1', lang: 'JavaScript', logo: require('./assets/js-logo.png') },
+    { id: '2', lang: 'Python', logo: require('./assets/python-logo.png') },
+    { id: '3', lang: 'Java', logo: require('./assets/java-logo.png') },
+];
+
+function App () {
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={langs}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <LanguageItem logo={item.logo} lang={item.lang} />}
+            />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        paddingTop: 40,
+    },
 });
+
+export default App;
